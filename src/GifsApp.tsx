@@ -13,7 +13,14 @@ export const GifsApp = () => {
         setPreviousSearches(prev => [...prev, term]);
     }
 
-    const handleSearch = (term: string) => {
+    const handleSearch = (term: string = '') => {
+        term = term.trim().toLocaleLowerCase();
+        if (term.length === 0) return
+
+        if (!previousSearches.includes(term)) {
+            const currentTerms = previousSearches.slice(0, 6)
+            setPreviousSearches([term, ...currentTerms]);
+        }
 
     }
 
