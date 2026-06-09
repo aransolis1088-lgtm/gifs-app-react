@@ -4,6 +4,7 @@ import CustomHeader from "./shared/components/CustomHeader";
 import SearchBar from "./shared/components/SearchBar";
 import { mockGifs } from "./mock-data/gifs.mock";
 import { useState } from "react";
+import { getGifsByQuery } from "./gifs/actions/get-gifs-by-query.actions";
 
 export const GifsApp = () => {
 
@@ -13,13 +14,16 @@ export const GifsApp = () => {
         setPreviousSearches(prev => [...prev, term]);
     }
 
-    const handleSearch = (term: string = '') => {
+    const handleSearch = async (term: string = '') => {
         term = term.trim().toLocaleLowerCase();
         if (term.length === 0) return
 
         if (!previousSearches.includes(term)) {
             const currentTerms = previousSearches.slice(0, 6)
             setPreviousSearches([term, ...currentTerms]);
+
+            const gifs = await getGifsByQuery(term);
+            console.log(gifs);
         }
 
     }
