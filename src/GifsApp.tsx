@@ -9,7 +9,6 @@ import type { Gif } from "./gifs/interfaces/gif.interface";
 export const GifsApp = () => {
 
     const [gifs, setGifs] = useState<Gif[]>([]);
-
     const [previousSearches, setPreviousSearches] = useState<string[]>([]);
 
     const handleTermClicked = (term: string) => {
@@ -27,7 +26,6 @@ export const GifsApp = () => {
             const gifs = await getGifsByQuery(term);
             setGifs(gifs);
         }
-
     }
 
     return (
